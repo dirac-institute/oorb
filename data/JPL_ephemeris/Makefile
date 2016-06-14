@@ -93,11 +93,11 @@ test : $(TESTER)
 
 # Compile ascii-to-binary converter:
 $(CONVERTER): modules $(CONV_SRC)
-	$(FC) -o $(CONVERTER) $(FC_INC)../../modules ../../$(MODULEPATH)/*.o $(CONV_SRC)
+	$(FC) -o $(CONVERTER) $(FCOPTIONS) $(FC_INC)../../modules ../../$(MODULEPATH)/*.o $(CONV_SRC)
 
 # Compile tester:
 $(TESTER): modules $(TEST_SRC)
-	$(FC) -o $(TESTER) $(FC_INC)../../modules ../../$(MODULEPATH)/*.o $(TESTER_SRC)
+	$(FC) -o $(TESTER) $(FCOPTIONS) $(FC_INC)../../modules ../../$(MODULEPATH)/*.o $(TESTER_SRC)
 
 # Build input file for ascii-to-binary converter:
 $(EPH_INPUT):

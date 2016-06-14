@@ -31,7 +31,7 @@ include ../Makefile.include
 F2PY := f2py
 ifneq ($(LDFLAGS),)
     ifeq ($(LIBEXT),dylib)
-        F2PY := LDFLAGS="-undefined dynamic_lookup -bundle $(LDFLAGS)" $(F2PY)
+        F2PY := LDFLAGS="-undefined dynamic_lookup -bundle $(RPATHOPTS) $(LDFLAGS)" $(F2PY)
     else
         F2PY := LDFLAGS="$(FC_SHARED_GFORTRAN) $(LDFLAGS)" $(F2PY)
     endif

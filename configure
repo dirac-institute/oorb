@@ -126,6 +126,14 @@ elif [[ $1 == gfortran ]] ; then
     echo 'FC_INC = $(FC_INC_GFORTRAN)' >> $include_file
     echo 'FC_SHARED = $(FC_SHARED_GFORTRAN)' >> $include_file
 
+    if [[ $OSTYPE == darwin* ]]; then
+        # OS X: Autodetect any flags needed to correctly set up the RPATH
+        # This is mostly needed for Anaconda-delivered gfortran that has
+        # @rpath in its runtime libraries' install_name
+        echo 'RPATHOPTS = $(shell '"$PWD"'/get-rpath.sh gfortran)' >> $include_file
+        echo 'FCOPTIONS += $(RPATHOPTS)' >> $include_file
+    fi
+
 else
 
     echo Erroneous compiler: $1
