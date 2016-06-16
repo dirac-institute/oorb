@@ -26,13 +26,15 @@ build()
 	( cd main && make oorb )
 
 	# update JPL Ephemeris files and make 405 and 430 ephemeris files
+	# these are stored in the data/ directory, so we can clean the (large)
+	# temporaries accumulated in JPL_ephemeris subdir as soon as we're done.
         (
             export EPH_TYPE=405
-	    cd data/JPL_ephemeris && make && make test
+	    cd data/JPL_ephemeris && make && make test && make clean && rm -f de405.dat
         )
         (
             export EPH_TYPE=430
-            cd data/JPL_ephemeris && make && make test
+            cd data/JPL_ephemeris && make && make test && make clean && rm -f de430.dat
         )
 
 	# build & test python bindings
